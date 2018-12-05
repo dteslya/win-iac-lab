@@ -1,0 +1,16 @@
+---
+- hosts: primary_domain_controller
+  roles:
+    - primary_domain_controller
+    - common
+
+- hosts: replica_domain_controller
+  roles:
+    - replica_domain_controller
+    - common
+
+- hosts: fileserver
+  roles:
+    - fileserver
+    - common
+    

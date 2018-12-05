@@ -1,0 +1,37 @@
+---
+- name: change DNS server
+  when: not ansible_windows_domain_member
+  win_dns_client:
+    adapter_names: '*'
+    ipv4_addresses: "{{ groups['primary_domain_controller'][0] }}"
+
+- name: join domain
+  win_domain_membership:
+    dns_domain_name: "{{ domain }}"
+    domain_admin_user: "{{ domain_admin }}"
+    domain_admin_password: "{{ domain_admin_password }}"
+    state: domain
+  register: domain_joined
+
+- name: reboot after domain join
+  win_reboot:
+  when: domain_joined.reboot_required
+
+- name: Wait for system to become reachable over WinRM
+  wait_for_connection:
+    timeout: 900
+
+- name: install ad
+  win_domain_controller:
+    dns_domain_name: "{{ domain }}"
+    domain_admin_user: "{{ domain_admin }}"
+    domain_admin_password: "{{ domain_admin_password }}"
+    safe_mode_password: "{{ domain_safemode_password }}"
+    state: domain_controller
+  register: ad
+
+- name: reboot server
+  win_reboot:
+    msg: "Installing AD. Rebooting..."
+    pre_reboot_delay: 15
+  when: ad.changed

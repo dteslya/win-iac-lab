@@ -1,0 +1,15 @@
+# Terraform
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# Ansible
+ansible/.vault_pass
+
+# Packer
+packer/vars.json

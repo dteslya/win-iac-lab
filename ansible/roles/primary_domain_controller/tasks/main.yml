@@ -1,0 +1,15 @@
+---
+- name: install ad
+  win_domain:
+    dns_domain_name: "{{ domain }}"
+    domain_netbios_name: "{{ netbios_domain }}"
+    safe_mode_password: "{{ domain_safemode_password }}"
+  register: ad
+
+- name: reboot server
+  win_reboot:
+    msg: "Installing AD. Rebooting..."
+    pre_reboot_delay: 15
+    reboot_timeout: 600
+    post_reboot_delay: 420
+  when: ad.changed

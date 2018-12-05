@@ -1,0 +1,74 @@
+{
+  "variables": {
+    "vsphere_server": "",
+    "vsphere_user": "",
+    "vsphere_password": "",
+    "vsphere_template_name": "",
+    "vsphere_folder": "",
+    "vsphere_dc_name": "",
+    "vsphere_compute_cluster": "",
+    "vsphere_host": "",
+    "vsphere_portgroup_name": "",
+    "vsphere_datastore": "",
+    "winadmin_password": "",
+    "cpu_num": "",
+    "mem_size": "",
+    "disk_size": "",
+    "os_iso_path": "",
+    "vmtools_iso_path":""
+  },
+  "sensitive-variables": ["vsphere_password", "winadmin_password"],
+  "builders": [
+    {
+      "type": "vsphere-iso",
+
+      "vcenter_server":      "{{user `vsphere_server`}}",
+      "username":            "{{user `vsphere_user`}}",
+      "password":            "{{user `vsphere_password`}}",
+      "insecure_connection": "true",
+
+      "vm_name": "{{user `vsphere_template_name`}}",
+      "folder" : "{{user `vsphere_folder`}}",
+      "datacenter": "{{user `vsphere_dc_name`}}",
+      "cluster":     "{{user `vsphere_compute_cluster`}}",
+      "host": "{{user `vsphere_host`}}",
+      "network": "{{user `vsphere_portgroup_name`}}",
+      "datastore": "{{user `vsphere_datastore`}}",
+      "convert_to_template": "true",
+
+      "guest_os_type": "windows9Server64Guest",
+
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "winrm_password": "{{user `winadmin_password`}}",
+
+      "CPUs":             "{{user `cpu_num`}}",
+      "RAM":              "{{user `mem_size`}}",
+      "RAM_reserve_all": true,
+      "firmware": "bios",
+
+      "disk_controller_type":  "lsilogic-sas",
+      "disk_size":        "{{user `disk_size`}}",
+      "disk_thin_provisioned": true,
+
+      "network_card": "vmxnet3",
+
+      "iso_paths": [
+        "{{user `os_iso_path`}}",
+        "{{user `vmtools_iso_path`}}"
+      ],
+      "floppy_files": [
+        "setup/autounattend.xml",
+        "setup/setup.ps1",
+        "setup/vmtools.cmd"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "windows-shell",
+      "inline": ["dir c:\\"]
+    }
+  ]
+}

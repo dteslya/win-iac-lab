@@ -1,0 +1,18 @@
+{
+    "vsphere_server": "vcenter.lab.local",
+    "vsphere_user": "user@lab.local",
+    "vsphere_password": "S3cret!",
+    "vsphere_template_name": "Win2016DC_14393_Packer",
+    "vsphere_folder": "lab/templates",
+    "vsphere_dc_name": "DC1",
+    "vsphere_compute_cluster": "DC1_cluster",
+    "vsphere_host": "dc1-esx-01.lab.local",
+    "vsphere_portgroup_name": "lab_portgroup",
+    "vsphere_datastore": "DC1_datastore",
+    "winadmin_password": "S3cret!",
+    "cpu_num": "4",
+    "mem_size": "8192",
+    "disk_size": "32768",
+    "os_iso_path": "[ISO] MS/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+    "vmtools_iso_path":"[ISO] VMware/VMware-tools-windows-10.3.2-9925305.iso"
+}

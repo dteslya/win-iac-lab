@@ -1,0 +1,36 @@
+# vsphere related params
+vsphere_user = "user@lab.local"
+vsphere_password = "S3cret!"
+vsphere_server = "vcenter.lab.local"
+vsphere_dc_name = "DC1"
+vsphere_dscluster = "DC1_datastore_cluster"
+vsphere_compute_cluster = "DC1_cluster"
+vsphere_portgroup_name = "lab_portgroup"
+vsphere_folder = "lab"
+vsphere_template_name = "Win2016DC_14393_Packer"
+
+# Which Windows administrator password to set during vm customization
+winadmin_password = "S3cret!"
+
+# Primary Domain Controller settings
+PDC_name = "01-pdc" # hostname
+PDC_IP = "10.5.202.4"
+PDC_cpu_num = 4
+PDC_mem = 8192
+
+# Replica Domain Controller settings
+ReplicaDC_name = "02-replicadc"
+ReplicaDC_IP = "10.5.202.5"
+ReplicaDC_cpu_num = 4
+ReplicaDC_mem = 8192
+
+# Fileserver settings
+Fileserver_name = "03-fileserver"
+Fileserver_IP = "10.5.202.6"
+Fileserver_cpu_num = 4
+Fileserver_mem = 8192
+
+# Common network params
+netmask = "24"
+def_gw = "10.5.202.1"
+dns_server = "10.5.202.3"

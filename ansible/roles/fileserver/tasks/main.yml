@@ -1,0 +1,19 @@
+---
+- name: change DNS server
+  win_dns_client:
+    adapter_names: '*'
+    ipv4_addresses: 
+      - "{{ groups['primary_domain_controller'][0] }}"
+      - "{{ groups['replica_domain_controller'][0] }}"
+
+- name: join domain
+  win_domain_membership:
+    dns_domain_name: "{{ domain }}"
+    domain_admin_user: "{{ domain_admin }}"
+    domain_admin_password: "{{ domain_admin_password }}"
+    state: domain
+  register: domain_joined
+
+- name: reboot after domain join
+  win_reboot:
+  when: domain_joined.reboot_required
