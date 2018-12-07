@@ -14,6 +14,7 @@ VMware vSphere serves as a virtualization platform.
 * [Ansible](http://ansible.com)
 * vSphere vCenter accessible from your workstation
 * DHCP server for VM template building
+* [Windows Server 2016 ISO](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2016)
 
 ## Setup
 * Clone this repo to your workstation (git clone https://github.com/dteslya/win-iac-lab)
@@ -51,7 +52,7 @@ I put 3 plays in one playbook: each for every server role.
 * `groupvars/all.yml` all variables are defined here. I use Ansible Vault to encrypt sensitive data such as passwords (`ansible-vault encrypt_string string_to_encrypt`)
 
 ## How to use
-### Building VM template
+### Build VM template
 1. cd to `packer` dir
 2. run `packer build -var-file=vars.json windows-server-2016.json`
 
