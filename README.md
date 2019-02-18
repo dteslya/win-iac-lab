@@ -12,6 +12,7 @@ VMware vSphere serves as a virtualization platform.
 * [Packer Builder for VMware vSphere](https://github.com/jetbrains-infra/packer-builder-vsphere)
 * [Terraform](http://terraform.io)
 * [Ansible](http://ansible.com)
+* [pywinrm](https://github.com/diyan/pywinrm) module (`pip install pywinrm`)
 * vSphere vCenter accessible from your workstation
 * DHCP server for VM template building
 * [Windows Server 2016 ISO](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2016)
